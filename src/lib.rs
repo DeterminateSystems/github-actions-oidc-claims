@@ -1,5 +1,24 @@
 use serde;
 
+#[derive(serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum Visibility {
+    Internal,
+    Private,
+    Public,
+    #[serde(untagged)]
+    Other(String),
+}
+
+#[derive(serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum RunnerEnvironment {
+    GithubHosted,
+    SelfHosted,
+    #[serde(untagged)]
+    Other(String),
+}
+
 // Based on
 // https://web.archive.org/web/20230602040457/https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -46,7 +65,7 @@ pub struct Claims {
     /// The target branch of the pull request in a workflow run.
     pub base_ref: String,
     /// The name of the environment used by the job. To include the environment claim you must reference an environment.
-    pub environment: String,
+    pub environment: Option<String>,
     /// The name of the event that triggered the workflow run.
     pub event_name: String,
     /// The source branch of the pull request in a workflow run.
@@ -57,12 +76,12 @@ pub struct Claims {
     pub job_workflow_sha: String,
     /// (Reference) The git ref that triggered the workflow run.
     /// Called "ref" in the raw claim, but we can't use that because it's a Rust keyword.
-    #[serde(rename="ref")]
+    #[serde(rename = "ref")]
     pub git_ref: String,
     /// The type of ref, for example: "branch".
     pub ref_type: String,
     /// The visibility of the repository where the workflow is running. Accepts the following values: internal, private, or public.
-    pub repository_visibility: String,
+    pub repository_visibility: Visibility,
     /// The repository from where the workflow is running.
     pub repository: String,
     /// The ID of the repository from where the workflow is running.
@@ -78,7 +97,7 @@ pub struct Claims {
     /// The number of times this workflow run has been retried.
     pub run_attempt: String,
     /// The type of runner used by the job. Accepts the following values: github-hosted or self-hosted.
-    pub runner_environment: String,
+    pub runner_environment: RunnerEnvironment,
     /// The name of the workflow.
     pub workflow: String,
     /// The ref path to the workflow. For example, octocat/hello-world/.github/workflows/my-workflow.yml@refs/heads/my_branch.
