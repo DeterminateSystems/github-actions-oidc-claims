@@ -1,6 +1,6 @@
 use serde;
 
-#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Debug)]
 #[serde(rename_all = "kebab-case")]
 pub enum Visibility {
     Internal,
@@ -10,7 +10,7 @@ pub enum Visibility {
     Other(String),
 }
 
-#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Debug)]
 #[serde(rename_all = "kebab-case")]
 pub enum RunnerEnvironment {
     GithubHosted,
@@ -21,7 +21,7 @@ pub enum RunnerEnvironment {
 
 // Based on
 // https://web.archive.org/web/20230602040457/https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token
-#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(serde::Serialize, serde::Deserialize, PartialEq, Clone, Debug)]
 pub struct Claims {
     // Mandatory(?) standard claims
     /// Audience
