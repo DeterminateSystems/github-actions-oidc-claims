@@ -1,5 +1,3 @@
-use serde;
-
 #[derive(serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Debug)]
 #[serde(rename_all = "kebab-case")]
 pub enum Visibility {
