@@ -103,3 +103,44 @@ pub struct Claims {
     /// The commit SHA for the workflow file.
     pub workflow_sha: String,
 }
+
+impl Claims {
+    /// Fill in all the fields of a claim set.
+    /// May be useful for testing, but does not resemble GitHub-issued tokens very closely, and the fields are likely to require further adjustment by the caller.
+    pub fn make_dummy() -> Self {
+        Self {
+            aud: "".into(),
+            iss: "".into(),
+            sub: "".into(),
+            alg: "RS256".into(),
+            exp: 33247274880f64,
+            iat: 1690366107f64,
+            jti: "".into(),
+            kid: "".into(),
+            nbf: 1690366107f64,
+            typ: "JWT".into(),
+            actor: "".into(),
+            actor_id: "".into(),
+            base_ref: "".into(),
+            environment: None,
+            event_name: "".into(),
+            head_ref: "".into(),
+            job_workflow_ref: None,
+            job_workflow_sha: None,
+            git_ref: "refs/heads/main".into(),
+            ref_type: "branch".into(),
+            repository_visibility: Visibility::Public,
+            repository: "".into(),
+            repository_id: "".into(),
+            repository_owner: "".into(),
+            repository_owner_id: "".into(),
+            run_id: "".into(),
+            run_number: "".into(),
+            run_attempt: "1".into(),
+            runner_environment: RunnerEnvironment::GithubHosted,
+            workflow: "".into(),
+            workflow_ref: "".into(),
+            workflow_sha: "".into(),
+        }
+    }
+}
