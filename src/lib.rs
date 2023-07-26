@@ -69,9 +69,9 @@ pub struct Claims {
     /// The source branch of the pull request in a workflow run.
     pub head_ref: String,
     /// For jobs using a reusable workflow, the ref path to the reusable workflow. For more information, see "Using OpenID Connect with reusable workflows."
-    pub job_workflow_ref: String,
+    pub job_workflow_ref: Option<String>,
     /// For jobs using a reusable workflow, the commit SHA for the reusable workflow file.
-    pub job_workflow_sha: String,
+    pub job_workflow_sha: Option<String>,
     /// (Reference) The git ref that triggered the workflow run.
     /// Called "ref" in the raw claim, but we can't use that because it's a Rust keyword.
     #[serde(rename = "ref")]
