@@ -32,10 +32,6 @@ pub struct Claims {
     /// Defines the subject claim that is to be validated by the cloud provider. This setting is essential for making sure that access tokens are only allocated in a predictable way.
     pub sub: String,
 
-    // Additional standard claims
-    /// Algorithm
-    /// The algorithm used by the OIDC provider.
-    pub alg: String,
     /// Expires at
     /// Identifies the expiry time of the JWT.
     pub exp: f64,
@@ -45,15 +41,9 @@ pub struct Claims {
     /// JWT token identifier
     /// Unique identifier for the OIDC token.
     pub jti: String,
-    /// Key identifier
-    /// Unique key for the OIDC token.
-    pub kid: String,
     /// Not before
     /// JWT is not valid for use before this time.
     pub nbf: f64,
-    /// Type
-    /// Describes the type of token. This is a JSON Web Token (JWT).
-    pub typ: String,
 
     // GitHub-specific claims
     /// The personal account that initiated the workflow run.
@@ -112,13 +102,10 @@ impl Claims {
             aud: "".into(),
             iss: "".into(),
             sub: "".into(),
-            alg: "RS256".into(),
             exp: 33247274880f64,
             iat: 1690366107f64,
             jti: "".into(),
-            kid: "".into(),
             nbf: 1690366107f64,
-            typ: "JWT".into(),
             actor: "".into(),
             actor_id: "".into(),
             base_ref: "".into(),
